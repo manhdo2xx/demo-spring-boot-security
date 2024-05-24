@@ -1,7 +1,6 @@
 package com.example.demo_security.Service.ServiceImpl;
 
 import com.example.demo_security.Model.User;
-import com.example.demo_security.Model.UserRequest;
 import com.example.demo_security.Repository.UserRepo;
 import com.example.demo_security.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

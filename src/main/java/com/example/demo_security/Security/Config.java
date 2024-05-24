@@ -44,7 +44,7 @@ public class Config {
                 .csrf(c -> c.ignoringRequestMatchers("/signup/**"))
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/**","/signup/**","/home").permitAll()
+                                .requestMatchers("/**","/signup/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults())
