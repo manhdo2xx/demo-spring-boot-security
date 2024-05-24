@@ -1,7 +1,6 @@
 package com.example.demo_security.Service.ServiceImpl;
 
 import com.example.demo_security.Model.User;
-import com.example.demo_security.Model.UserRequest;
 import com.example.demo_security.Repository.UserRepo;
 import com.example.demo_security.Service.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +17,8 @@ public class SignUpServiceImpl implements SignUpService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void createUser(UserRequest userRequest) {
-        User user = new User();
-        user.setRoles(userRequest.getRoles());
-        user.setName(userRequest.getName());
-        user.setUsername(userRequest.getUsername());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        User savedUser = userRepo.save(user);
+    public void createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepo.save(user);
     }
 }

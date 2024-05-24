@@ -1,7 +1,7 @@
 package com.example.demo_security.Controller;
 
 
-import com.example.demo_security.Model.UserRequest;
+import com.example.demo_security.Model.User;
 import com.example.demo_security.Service.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ public class SignUpController {
     @Autowired
     SignUpService signUpService;
 
-    @PostMapping("/createUser")
-    public ResponseEntity<String> createUser(@RequestBody UserRequest userRequest) {
-        signUpService.createUser(userRequest);
+    @PostMapping("/create")
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        signUpService.createUser(user);
         return ResponseEntity.ok().body("User registered successfully!");
     }
 }

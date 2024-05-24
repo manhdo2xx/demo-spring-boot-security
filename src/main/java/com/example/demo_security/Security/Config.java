@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -38,19 +39,18 @@ public class Config {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(c -> c.ignoringRequestMatchers("/signup/**"))
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/**","/signup/**","/home").permitAll()
+                                .requestMatchers("/**","/login").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults())
+                .formLogin(formLogin -> formLogin
+                        .defaultSuccessUrl("/home", true) // Chuyển hướng đến /home sau khi đăng nhập thành công
+                        .permitAll())
                 .httpBasic(withDefaults());
         return httpSecurity.build();
     }
-
-
 }
