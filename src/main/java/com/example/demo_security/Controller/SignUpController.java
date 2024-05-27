@@ -5,6 +5,7 @@ import com.example.demo_security.Model.User;
 import com.example.demo_security.Service.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class SignUpController {
     @Autowired
     SignUpService signUpService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @PostMapping("/create")
     public ResponseEntity<String> createUser(@RequestBody User user) {
